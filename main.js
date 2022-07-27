@@ -1,12 +1,8 @@
 const {app, BrowserWindow} =  require('electron');
-const db = require('./db.js');
+const Database = require('./Database.js');
 
-//busca usuarios no banco
-async () => {
-    const usuarios = await db.selectUsuarios();
-    console.log('Buscando usuarios no banco...');
-    console.log(usuarios)
-}
+//Definindo Banco de Dados
+const database = new Database('root','root','localhost','3306','razor_db');
 
 //janela principal
 var mainWindow = null;
@@ -16,6 +12,8 @@ async function createWindow(){
         width:800,
         height:600
     });
+
+    await mainWindow.loadFile('./src/pages/index.html');
 }
 
 //on ready
